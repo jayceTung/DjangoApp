@@ -2,7 +2,7 @@
 
 # @Author  : super
 # @Time    : 2018/1/24
-# @desc    :
+# @desc    : demo for python
 
 
 if __name__ == '__main__':
