@@ -1,7 +1,7 @@
-"""DjangoApp URL Configuration
+"""blogproject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
+    https://docs.djangoproject.com/en/1.10/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -13,14 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-from django.urls import include
+from django.http import HttpResponse
 
-from blog import views
+from blog.feeds import AllPostsRssFeed
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^$', view.hello),
-    url(r'', include('blog.urls', namespace='blog', app_name='blog'))
+    url(r'', include('blog.urls')),
+    url(r'', include('comments.urls')),
+    url(r'^robots\.txt$', lambda r: HttpResponse('User-agent: *\nDisallow: /', content_type='text/plain')),
+    url(r'^search/', include('haystack.urls')),
+    url(r'^all/rss/$', AllPostsRssFeed(), name='rss'),
 ]
