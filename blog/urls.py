@@ -1,13 +1,13 @@
+# -*- coding: utf-8 -*-
+
+# @Author  : super
+# @Time    : 2018/1/24
+# @desc    : pattern url
 from django.conf.urls import url
+from blog import views
 
-from . import views
-
-app_name = 'blog'
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^post/(?P<pk>[0-9]+)/$', views.PostDetailView.as_view(), name='detail'),
-    url(r'^archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{1,2})/$', views.ArchivesView.as_view(), name='archives'),
-    url(r'^category/(?P<pk>[0-9]+)/$', views.CategoryView.as_view(), name='category'),
-    url(r'^tag/(?P<pk>[0-9]+)/$', views.TagView.as_view(), name='tag'),
-    # url(r'^search/$', views.search, name='search'),
+    url(r'^blog/$', views.IndexView.as_view(), name='index'),
+    url(r'^blog/article/(?P<article_id>\d+)$', views.ArticleDetailView.as_view(), name='detail'),
+    url(r'^blog/category/(?P<cate_id>\d+)$', views.CategoryView.as_view(), name='category'),
 ]
